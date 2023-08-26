@@ -20,7 +20,7 @@ exports.getUserData = async (req, res) => {
             userImage: user.userImage,
         };
 
-        console.log('User data:', userData);
+        // console.log('User data:', userData);
 
         return res.status(200).json(userData);
     } catch (error) {
