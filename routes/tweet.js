@@ -5,12 +5,18 @@ const router = express.Router();
 
 const {
     createTweet,
-    getTweets
+    getTweets,
+    likeTweet,
+    shareTweet
 
 } = require('../controller/tweet');
 
 router.post('/createtweet', createTweet);
 
 router.get('/get-tweets',getTweets);
+
+router.post('/like-tweet',likeTweet);
+
+router.post('/share-tweet',shareTweet);
 
 module.exports = router;

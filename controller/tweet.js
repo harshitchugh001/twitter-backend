@@ -14,8 +14,6 @@ exports.createTweet= async (req, res) => {
             username: username,
             date: new Date(),
             likeArray: [],
-            likeCount: 0,
-            shareCount: 0
         });
 
         await newTweet.save();
@@ -36,5 +34,52 @@ exports.getTweets = async (req, res) => {
         res.status(500).json({ error: 'Something went wrong. Please try again later.' });
     }
 };
+
+exports.likeTweet = async (req, res) => {
+    const { userId, tweetId } = req.body;
+
+    try {
+        const tweet = await Tweet.findOne({ tweetId });
+
+        if (!tweet) {
+            return res.status(404).json({ error: 'Tweet not found' });
+        }
+
+        if (tweet.likeArray.includes(userId)) {
+            return res.status(200).json({ message: 'User is allowed to like the tweet only one time' });
+        }
+
+        tweet.likeArray.push(userId);
+        tweet.likeCount += 1;  
+        await tweet.save();
+
+        res.status(200).json({ message: 'Tweet liked successfully', tweet });
+    } catch (error) {
+        console.error('Error liking tweet:', error);
+        res.status(500).json({ error: 'Something went wrong. Please try again later.' });
+    }
+};
+
+exports.shareTweet = async (req, res) => {
+    const { tweetId } = req.body;
+
+    try {
+        const tweet = await Tweet.findOne({ tweetId });
+
+        if (!tweet) {
+            return res.status(404).json({ error: 'Tweet not found' });
+        }
+
+        tweet.shareCount += 1;  
+        await tweet.save();
+
+        res.status(200).json({ message: 'Tweet shared successfully', tweet });
+    } catch (error) {
+        console.error('Error sharingtweet:', error);
+        res.status(500).json({ error: 'Something went wrong. Please try again later.' });
+    }
+};
+
+
 
 

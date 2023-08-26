@@ -33,6 +33,11 @@ const tweetSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    commentCount:{
+        type:Number,
+        default:0
+
+    },
     shareCount: {
         type: Number,
         default: 0
