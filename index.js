@@ -26,7 +26,7 @@ mongoose.connection.on("error", err => {
 const authRoutes = require('./routes/auth');
 const homeRoutes=require('./routes/home');
 const tweetRoutes=require('./routes/tweet')
-// const commentRoutes = require('./routes/comment');
+const commentRoutes = require('./routes/comments');
 // const nestedCommentRoutes = require('./routes/nestedcomments');
 
 
@@ -44,7 +44,7 @@ app.use(cors());
 app.use('/api', authRoutes);
 app.use('/api',homeRoutes);
 app.use('/api',tweetRoutes);
-// app.use('/api', commentRoutes);
+app.use('/api', commentRoutes);
 // app.use('/api', nestedCommentRoutes);
 
 
