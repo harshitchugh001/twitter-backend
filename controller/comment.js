@@ -21,6 +21,7 @@ exports.createComment = async (req, res) => {
 
 exports.getCommentsByTweetId = async (req, res) => {
   const { tweetId } = req.params;
+  console.log(req.params,"---");
 
   try {
     const comments = await Comment.find({ tweetId });
